@@ -1,0 +1,18 @@
+# Render.com blueprint — deploys the full game (static client + WebSocket
+# multiplayer server) with one click. Free tier, automatic HTTPS/WSS.
+#
+#   1. Push this repo to GitHub
+#   2. render.com → New → Blueprint → pick this repo
+#   3. Create. You get https://<name>.onrender.com — paste that URL into the
+#      game's MULTIPLAYER panel to connect.
+services:
+  - type: web
+    name: last-light
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server/server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: 20.11.1
